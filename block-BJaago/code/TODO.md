@@ -26,11 +26,12 @@ var userMessage = sayHelloToUser('Bran');
 
 <!-- Put your image below -->
 
-![](./img/image-name.jpg)
+![](./img/image-01.jpg)
 
 2.
 
 ```js
+
 function sayHi() {
   var name = 'Lydia';
   var age = 21;
@@ -39,11 +40,14 @@ function sayHi() {
 }
 
 sayHi();
+
+*
+
 ```
 
 <!-- Put your image below -->
 
-![](./img/image-name.jpg)
+![](./img/image-02.jpg)
 
 3.
 
@@ -56,11 +60,12 @@ function sayHi() {
 }
 
 sayHi();
+
 ```
 
 <!-- Put your image below -->
 
-![](./img/image-name.jpg)
+![](./img/image-03.jpg)
 
 4.
 
@@ -73,4 +78,9 @@ var arr = [1, 2, 3, 4, 5, 6];
 function double(num) {
   return num * 2;
 }
+
+
 ```
+<!-- Put your image below -->
+
+![](./img/image-04.jpg)
