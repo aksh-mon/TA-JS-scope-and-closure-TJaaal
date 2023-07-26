@@ -1,7 +1,7 @@
 Find the output of the code snippets below:
 
 ```js
-console.log(numA + numB); //OUTPUT
+console.log(numA + numB); //NaN
 var numA = 21,
   numB = 30;
 ```
@@ -9,9 +9,10 @@ var numA = 21,
 Find the output of the code snippets below:
 
 ```js
-console.log(numA + numB); //OUTPUT
+console.log(numA + numB); // Uncaught ReferenceError: numA is not defined
 let numA = 21,
   numB = 30;
+
 ```
 
 Find the output of the code snippets below:
@@ -19,13 +20,13 @@ Find the output of the code snippets below:
 ```js
 let numA = 21,
   numB = 30;
-console.log(numA + numB); //OUTPUT
+console.log(numA + numB); // 51
 ```
 
 Find the output of the code snippets below:
 
 ```js
-console.log(sayHello()); // OUTPUT
+console.log(sayHello()); // Hello
 function sayHello() {
   console.log("Hey");
 }
