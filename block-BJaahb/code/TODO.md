@@ -11,6 +11,7 @@ function outer() {
 }
 let getSum = outer();
 let num = getSum();
+
 ```
 
 2.
@@ -28,10 +29,10 @@ function getCounter() {
 
 let counter = getCounter();
 
-counter(); // output
-counter(); // output
-counter(); // output
-counter(); // output
+counter(); // 0
+counter(); // 1
+counter(); // 2
+counter(); // 3
 ```
 
 3. Create the execution context diagram
