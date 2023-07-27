@@ -5,7 +5,11 @@
 - It should work exactly like array `forEach` method
 
 ```js
-function forEach() {}
+function forEach() {
+  for (let i = 0; i < arr.length; i++) {
+    callback(arr[i], i, arr);
+  }
+}
 
 forEach(['Sam', 'Jon', 'Arya'], (name, i, arr) =>
   console.log(name + name, i, arr)
