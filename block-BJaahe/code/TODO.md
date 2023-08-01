@@ -4,19 +4,43 @@
 
 ```js
 // Your code goes here
+function outer(input) {
+  const sayHello = function() {
+    console.log(input);
+  };
+  sayHello();
+}
+
+// Example:
+outer("hello,world"); // hello,world
 ```
 
 2. Write a function `delay` that accepts two arguments, a callback and the wait for the time in milliseconds (1000 ms is 1 second). `delay` should return a function that, when invoked waits for the specified amount of time before executing. (Use setTimeout)
 
 ```js
-// Your code goes here
+function delay(callback, waitTime) {
+  return function() {
+    setTimeout(callback, waitTime);
+  };
+}
+
+// Example usage:
+function sayHello() {
+  console.log("Hello, World!");
+}
+
+const delayedHello = delay(sayHello, 1000); 
+delayedHello();
+
 ```
 
 3. Write a function with a closure. The first function should only take one argument, someone's last name, and return the inner function. The returned `inner` function should take one more argument, someone's first name. When inner function when called it should console.log both the first name and the last name with a space.
 
 ```js
-function lastName() {
-  //  Your code goes here
+function lastName(lastName) {
+  return function(firstName) {
+    console.log(firstName + ' ' + lastName);
+  };
 }
 
 let lastNameLee = lastName('lee'); // logs nothing
@@ -35,6 +59,18 @@ lastNameLee('Lynne'); //logs 'Lynne Lee'
 ```js
 function storyWriter() {
   // Your code goes here
+   let story = '';
+
+  return {
+    addWords: function(words) {
+      story += words;
+      return story;
+    },
+    erase: function() {
+      story = '';
+      return story;
+    }
+  };
 }
 
 // Test
@@ -47,6 +83,7 @@ let storyOfMyLife = storyWriter();
 storyOfMyLife.addWords('My code broke.'); // 'My code broke.'
 storyOfMyLife.addWords('I ate some ice cream.'); //'My code broke. I ate some ice cream.'
 storyOfMyLife.erase(); // ''
+
 ```
 
 5. Create a function named `forEach` which accepts one parameter an array. Inside the function `forEach` there a variable named `index` which is initialized to `0`.
@@ -56,6 +93,14 @@ When `forEach` function is called it returns another function. When the returned
 ```js
 function forEach() {
   // Your code goes here
+let index = 0;
+
+  return function() {
+    if (index >= array.length) {
+      return undefined; 
+    }
+    return array[index++];
+  };
 }
 
 let next = [1, 2, 3, 4, 5];
@@ -73,6 +118,9 @@ The returned function accepts a string `prefix` and returns `prefix` and `title`
 ```js
 function addDesignation(title) {
   // your code goes here
+  return function(prefix) {
+    return prefix + ' ' + title;
+  };
 }
 
 let sales = addDesignation('Salesman');
@@ -92,6 +140,21 @@ manager('Head'); // Head Manager
 ```js
 function changeSalary() {
   // Your code goes here
+    
+    return {
+    raise: function() {
+      currentSalary += 500;
+      return currentSalary;
+    },
+    lower: function() {
+      currentSalary -= 500;
+      return currentSalary;
+    },
+    current: function() {
+      return currentSalary;
+    }
+  };
+
 }
 
 let sam = changeSalary(2000);
@@ -99,6 +162,7 @@ sam.raise(); // 2500
 
 let arya = changeSalary(4000);
 arya.lower(); // 3500
+
 ```
 
 8. Create a function named `nameFactory` which accepts `firstName` and `lastName` and returns an object with multiple functions.
@@ -109,6 +173,21 @@ arya.lower(); // 3500
 
 ```js
 // Your code goes here
+function nameFactory(firstName, lastName) {
+  return {
+    getFullName: function() {
+      return firstName + ' ' + lastName;
+    },
+    setFirstName: function(newFirstName) {
+      firstName = newFirstName;
+      return firstName + ' ' + lastName;
+    },
+    setLastName: function(newLastName) {
+      lastName = newLastName;
+      return firstName + ' ' + lastName;
+    }
+  };
+}
 
 let arya = nameFactory('Arya', 'Stark');
 arya.getFullName(); // "Arya Stark"
@@ -121,8 +200,11 @@ arya.setLastName('Lannister'); // "Jon Lannister"
 The returned function accepts a string (children) and returns the children with the tag you passed.
 
 ```js
-function createTag() {
+function createTag(tagName) {
   // your code goes here
+   return function(children) {
+    return `<${tagName}>${children}</${tagName}>`;
+  };
 }
 
 let bold = createTag('b');
@@ -130,4 +212,5 @@ bold('Hello World!'); // <b>Hello World!</b>
 
 let italic = createTag('i');
 italic('Hello World!'); // <i>Hello World!</i>
+
 ```
