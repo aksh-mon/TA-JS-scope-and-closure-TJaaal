@@ -5,8 +5,15 @@
 ```js
 // Your code goes here
 
+function multiplyBy(number) {
+  return function (anotherNumber) {
+    return number * anotherNumber;
+  };
+}
+
 const double = multiplyBy(2);
 const final = double(15); // final should be 30
+console.log(final);// 15
 ```
 
 2. Write a function called `fullName` that takes a string `firstName` as an argument and returns a function. Returned function takes another string `lastName` as an argument and returns full name.
@@ -14,8 +21,16 @@ const final = double(15); // final should be 30
 ```js
 // Your code goes here
 
+function fullName(firstName) {
+  return function (lastName) {
+    return `${firstName} ${lastName}`;
+  };
+}
+
 const name = fullName('Will');
 const final = name('Smith'); // final should be "Will Smith"
+console.log(final); // "Will Smith"
+
 ```
 
 3. Write a function called `isInBetween` which takes two parameter `a` and `b` and returns a function. When you call the returned function with any number it returns `true` if the value is in between `a` and `b`.
@@ -23,12 +38,15 @@ const final = name('Smith'); // final should be "Will Smith"
 ```js
 function isInBetween(a, b) {
   // your code goes here
+return function (number) {
+    return number >= a && number <= b;
+  };
 }
-
 const isChild = isInBetween(10, 100);
 isChild(21); // true
 isChild(45); // true
 isChild(103); // false
+
 ```
 
 4. Write a function call `letsWishThem` that take one parameter `string` called `greeting` and returns a function that takes another argument called `message`.
@@ -36,12 +54,16 @@ isChild(103); // false
 ```js
 function letsWishThem(greeting) {
   // your code goes here
+   return function (message) {
+    console.log(`${greeting} ${message}`);
+  };
 }
 
 const callWithHey = letsWishThem('Hey');
 const callWithHello = letsWishThem('Hello');
 callWithHey('Arya'); // Hey Arya
 callWithHello('How Are You?'); // Hello How Are You?
+
 ```
 
 5. Write a function called `addGame` which takes a string (name of the game) and the current score. It returns a function calling that will increment the score by one and print something like `Score of Basketball is 1`.
@@ -49,6 +71,11 @@ callWithHello('How Are You?'); // Hello How Are You?
 ```js
 function addGame(gameName) {
   // your code goes here
+    let score = initialScore;
+  return function () {
+    score++;
+    console.log(`Your score of ${gameName} is ${score}`);
+  };
 }
 
 // Output
@@ -65,6 +92,13 @@ cricket(); // Your score of Cricket is 2
 ```js
 function getCard(suit) {
   // your code goes here
+  const cards = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+
+  return function () {
+    const randomIndex = Math.floor(Math.random() * cards.length);
+    const randomCard = cards[randomIndex];
+    console.log(`Card is: ${randomCard} ${suit}`);
+  };
 }
 
 // Output
