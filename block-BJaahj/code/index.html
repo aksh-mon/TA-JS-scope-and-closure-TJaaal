@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        function objOfMatches(array1, array2, callback) {
+
+  const result = {};
+
+  for (let i = 0; i < array1.length; i++) {
+    const key = array1[i];
+    const transformedValue = callback(array2[i]);
+    result[key] = transformedValue;
+  }
+
+  return result;            
+}
+
+
+
+
+// TEST
+console.log(
+  objOfMatches(
+    ['hi', 'howdy', 'bye', 'later', 'hello',],
+    ['HI', 'Howdy', 'BYE', 'LATER', 'hello',],
+    function (str) {
+      return str.toUpperCase();
+    }
+  )
+); // should log: { hi: 'HI', bye: 'BYE', later: 'LATER' }
+
+
+function multiMap(arrVals, arrCallbacks) {
+    const result = {};
+
+for (let i = 0; i < arrVals.length; i++) {
+  const key = arrVals[i];
+  const callbackResults = [];
+
+  for (let j = 0; j < arrCallbacks.length; j++) {
+    const callback = arrCallbacks[j];
+    const callbackResult = callback(key);
+    callbackResults.push(callbackResult);
+  }
+
+  result[key] = callbackResults;
+}
+
+return result;
+}
+
+// TEST
+
+console.log(
+  multiMap(
+    ['catfood', 'glue', 'beer',],
+    [
+      function (str) {
+        return str.toUpperCase();
+      },
+      function (str) {
+        return (
+          str[0].toUpperCase() + str.slice(1).toLowerCase()
+        );
+      },
+      function (str) {
+        return str + str;
+      },
+    ]
+  )
+); 
+
+// should log: { catfood: ['CATFOOD', 'Catfood', 'catfoodcatfood'], glue: ['GLUE', 'Glue', 'glueglue'], beer: ['BEER', 'Beer', 'beerbeer'] }
+
+
+function generateObject() {
+  let resultObject = {};
+  let iValues = [];
+  let jValues = [];
+
+  // Loop to find odd numbers up to 10 and store them in iValues array
+  for (let i = 1; i <= 10; i++) {
+    if (i % 2 !== 0) {
+      iValues.push(i);
+    }
+  }
+
+  // Loop to find even numbers up to 10 and store them in jValues array
+  for (let j = 1; j <= 10; j++) {
+    if (j % 2 === 0) {
+      jValues.push(j);
+    }
+  }
+
+  // Combine iValues and jValues into the resultObject
+  for (let index = 0; index < iValues.length; index++) {
+    if (index < jValues.length) {
+      resultObject[iValues[index]] = jValues[index];
+    }
+  }
+
+  return resultObject;
+}
+
+
+let dix = document.createElement("p");
+
+let loop = () => {for(i= 0; i <= 5; i++){
+console.log(i,
+dix.innerText = "i");
+}
+};  
+
+let body = document.querySelector("body");
+
+body.appendChild(dix);
+
+loop();
+
+
+function objOfMatchesWithArray(array1, array2, callback) {
+  const result = {};
+
+  for (let i = 0; i < array1.length; i++) {
+    const input = array1[i];
+    const output = callback.reduce((acc, fn) => fn(acc), input);
+    
+    if (output === array2[i]) {
+      result[input] = output;
+    }
+  }
+
+  return result;
+}
+
+// TEST
+console.log(
+  objOfMatchesWithArray(
+    ['hi', 'howdy', 'bye', 'later', 'hello'],
+    ['HiHi', 'HowdyHowdy', 'BYEBYE', 'LATER', 'helloHello'],
+    [
+      function (str) {
+        return str.toUpperCase();
+      },
+      function (str) {
+        return (
+          str[0].toUpperCase() + str.slice(1).toLowerCase()
+        );
+      },
+      function (str) {
+        return str + str;
+      },
+    ]
+  )
+); 
+// should log: { hi: 'HiHi', howdy: 'HowdyHowdy'}
+
+function objOfMatchesWithArray(array1, array2,callback) {
+  const result = {};
+
+  for (let i = 0; i < array1.length; i++) {
+    const value = array1[i];
+    const transformedValue = callback.reduce((acc, fn) => fn(acc), value);
+
+    if (transformedValue === array2[i]) {
+      result[value] = transformedValue;
+    }
+  }
+
+  return result;
+}
+  
+  // TEST
+  console.log(
+    objOfMatchesWithArray(
+      ['hi', 'howdy', 'bye', 'later', 'hello'],
+      ['HiHi', 'HowdyHowdy', 'BYEBYE', 'LATER', 'helloHello'],
+      [
+        function (str) {
+          return str.toUpperCase();
+        },
+        function (str) {
+          return (
+            str[0].toUpperCase() + str.slice(1).toLowerCase()
+          );
+        },
+        function (str) {
+          return str + str;
+        },
+      ]
+    )
+  ); // should log: { hi: 'HiHi', howdy: 'HowdyHowdy'}
+  
+// 
+function objOfMatchesWithArray(array1, array2, callback) {
+  const result = {};
+
+  array1.forEach((value, index) => {
+    const valueResults = callback.map(fn => fn(value));
+    if (array2[index] === valueResults[valueResults.length - 1]) {
+      result[value] = valueResults;
+    }
+  });
+
+  return result;
+}
+
+
+
+console.log(
+  objOfMatchesWithArray(
+    ['hi', 'howdy', 'bye'],
+    [
+      function (str) {
+        return str.toUpperCase();
+      },
+      function (str) {
+        return (
+          str[0].toUpperCase() + str.slice(1).toLowerCase()
+        );
+      },
+      function (str) {
+        return str + str;
+      },
+    ]
+  )
+);
+
+
+function schedule() {
+    if (functions.length !== seconds.length) {
+    console.log('invalid input');
+    return;
+  }
+
+  for (let i = 0; i < functions.length; i++) {
+    const fn = functions[i];
+    const delay = seconds[i] * 1000; // Convert seconds to milliseconds
+    setTimeout(fn, delay);
+  }
+}
+
+function sayHi() {
+  console.log('Hi');
+}
+function sayHello() {
+  console.log('Hello');
+}
+function sayHey() {
+  console.log('Hey');
+}
+schedule([sayHi, sayHello, sayHey], [2, 3, 4]);
+
+// sayHi will be executed after 2 seconds
+// sayHello will be executed after 3 seconds
+// sayHey will be executed after 4 seconds
+
+</script>
+</body>
+</html>
