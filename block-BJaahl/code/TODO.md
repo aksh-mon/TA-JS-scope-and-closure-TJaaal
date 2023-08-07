@@ -3,6 +3,16 @@
 ```js
 function once(cb) {
   // your code goes here
+let called = false;
+  
+  return function() {
+    if (!called) {
+      called = true;
+      cb();
+    } else {
+      console.log('You can only call me once!');
+    }
+  };
 }
 
 // TEST
@@ -19,12 +29,23 @@ log(); // return undefinde (can't be called twice)
 ```js
 function once(cb) {
   // your code goes here
+let called = false;
+  
+  return function() {
+    if (!called) {
+      called = true;
+      cb(param);
+    } else {
+      console.log('You can only call me once!');
+    }
+  };
 }
 
 // TEST
 let log = once(console.log, 'Hello Console');
 log(); // log message "Hello Console"
 log(); // return undefinde (can't be called twice)
+
 ```
 
 3. Change the above function in such a way that it can accept `n` number of parameters for the callback function.
@@ -36,6 +57,17 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest
 ```js
 function once(cb) {
   // your code goes here
+
+  let called = false;
+  
+  return function() {
+    if (!called) {
+      called = true;
+      cb(...params);
+    } else {
+      console.log('You can only call me once!');
+    }
+  };
 }
 
 // TEST
@@ -49,6 +81,17 @@ log(); // return undefinde (can't be called twice)
 ```js
 function nTimes(cb, times, ...rest) {
   // your code goes here
+  let count = times;
+  
+  return function() {
+    if (count > 0) {
+      count--;
+      cb(...rest);
+    } else {
+      console.log('Cannot call anymore.');
+    }
+  };
+
 }
 
 // TEST
