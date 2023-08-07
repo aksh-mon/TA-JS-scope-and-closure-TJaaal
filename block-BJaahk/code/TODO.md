@@ -7,6 +7,10 @@ The returned function accepts a sentence. If the sentence contains the `fromWord
 ```js
 function censor(fromWord, toWord) {
   //  Your code goes here
+
+return function (sentence){
+    return sentence.replace(new RegExp(fromWord,'gi'),toWord);
+}
 }
 
 let censorSentence = censor('World', 'Sam');
@@ -14,6 +18,7 @@ censorSentence('Hello World'); // Hello Sam
 
 let censorQuote = censor('die', 'live');
 censorQuote(`all men must die`); // all men must live
+
 ```
 
 2. Create a function named `multipleCensor` which does not accept any parameter and returns a function.
@@ -26,6 +31,20 @@ The returned function either accepts two parameter or one parameter.
 ```js
 function multipleCensor() {
   //  Your code goes here
+  const wordsToReplace = [];
+
+  return function(...args) {
+    if (args.length === 2) {
+      const [fromWord, toWord] = args;
+      wordsToReplace.push({ fromWord, toWord });
+    } else if (args.length === 1) {
+      let sentence = args[0];
+      for (const { fromWord, toWord } of wordsToReplace) {
+        sentence = sentence.replace(new RegExp(fromWord, 'gi'), toWord);
+      }
+      return sentence;
+    }
+  };
 }
 
 let censorQuote = multipleCensor();
@@ -51,6 +70,17 @@ The returned function accepts one parameter.
 ```js
 function createCache() {
   // Your code goes here
+ const cache = {};
+
+  return function(param) {
+    if (param === password) {
+      return cache;
+    } else {
+      const result = callback(param);
+      cache[param] = result;
+      return result;
+    }
+  };
 }
 
 function add10(num) {
@@ -64,6 +94,7 @@ addCache(100); // 110
 addCache(1); // 11
 
 addCache('foo'); // {12: 22, 100: 110, 1: 11}
+
 ```
 
 4. Change the above function in such a way that when the returned function is called with any other value than password. It should first check the object where we are storing the argument and return value. If the key is present return the value form the object itself. Otherwise call the callback function with the parameter.
@@ -71,6 +102,20 @@ addCache('foo'); // {12: 22, 100: 110, 1: 11}
 ```js
 function createCache() {
   // Your code goes here
+  const cache = {};
+
+  return function(param) {
+    if (param === password) {
+      return cache;
+    } else if (cache.hasOwnProperty(param)) {
+      return cache[param];
+    } else {
+      const result = callback(param);
+      cache[param] = result;
+      return result;
+    }
+  };
+
 }
 
 function add10(num) {
